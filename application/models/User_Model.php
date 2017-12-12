@@ -9,6 +9,14 @@ class User_Model extends CI_Model {
 		return $query->result_array();
 	}
 
+	//IJUL WAS HERE
+	function getVendor(){
+		$this->db->select('nama_vendor')
+				 ->from('vendor');
+		$res = $this->db->get();
+		return $res->result();
+	}
+
 	function getHistory() {
 		$email = $this->session->userdata('email');
 

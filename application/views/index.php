@@ -141,7 +141,7 @@ function resizeText() {
         <!--main-section team-end-->         
         <!--twitter-feed-end-->  
 
-        <section class="print">
+<!--         <section class="print">
             <div class="container">
                 <div id="myCarousel" class="myCarousel carousel slide">
                     <div class="carousel-inner">
@@ -173,7 +173,7 @@ function resizeText() {
                                 </div>      
 </div>
 
-</section>
+</section> -->
 
         <footer class="footer_section" id="contact"> 
             <div class="container"> 

@@ -32,6 +32,44 @@ class Vendor_model extends CI_Model {
 		return $query->result_array();
 	}
 
+	function registerVendor($data){
+	
+		$this->db->insert('vendor', $data);
+		//insert $data ke tabel userdata
+	
+	}
+
+	//apiz
+	function updateOrder($id){
+		$this->db->set('status','Confirmed');
+		$this->db->where('id', $id);
+		$this->db->update('order_masuk');
+	}
+
+	//apiz
+	function getOrder(){
+		$usernamependor = $this->session->userdata('username');
+  		$this->db->select('*');
+  //$this->db->select('*');
+  		$this->db->where('username', $usernamependor);
+  		$this->db->from('order_masuk');
+  		$query = $this->db->get();
+  		return $query->result_array();
+	}
+
+	function getOrderHistori(){
+		$usernamependor = $this->session->userdata('username');
+  		$this->db->select('*');
+  //$this->db->select('*');
+  		$this->db->where('username', $usernamependor);
+  		$this->db->where('status', 'Confirmed');
+  		$this->db->from('order_masuk');
+  		$query = $this->db->get();
+  		return $query->result_array();
+	}
+
+
+
 	function getDataVendor2() {
 		$query = $this->db->get('vendor');
 		return $query->result_array();

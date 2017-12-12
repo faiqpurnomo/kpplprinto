@@ -27,12 +27,12 @@
         <script type="text/javascript" src="js/wow.js"></script>         
         <script type="text/javascript" src="js/classie.js"></script>         
         <script type="text/javascript">
-	$(document).ready(function(e) {
+    $(document).ready(function(e) {
         $('.res-nav_click').click(function(){
-		$('ul.toggle').slideToggle(600)	
-			});	
-			
-	$(document).ready(function() {
+        $('ul.toggle').slideToggle(600) 
+            }); 
+            
+    $(document).ready(function() {
 $(window).bind('scroll', function() {
          if ($(window).scrollTop() > 0) {
              $('#header_outer').addClass('fixed');
@@ -41,18 +41,18 @@ $(window).bind('scroll', function() {
              $('#header_outer').removeClass('fixed');
          }
     });
-	
-	  });
-	  
+    
+      });
+      
 
-		    });	
+            }); 
 function resizeText() {
-	var preferredWidth = 767;
-	var displayWidth = window.innerWidth;
-	var percentage = displayWidth / preferredWidth;
-	var fontsizetitle = 25;
-	var newFontSizeTitle = Math.floor(fontsizetitle * percentage);
-	$(".divclass").css("font-size", newFontSizeTitle)
+    var preferredWidth = 767;
+    var displayWidth = window.innerWidth;
+    var percentage = displayWidth / preferredWidth;
+    var fontsizetitle = 25;
+    var newFontSizeTitle = Math.floor(fontsizetitle * percentage);
+    $(".divclass").css("font-size", newFontSizeTitle)
 }
 </script>         
     </head>     
@@ -93,7 +93,7 @@ function resizeText() {
                     <div class="col-md-6 text-left">
                         <h3>FORMULIR CETAK</h3> 
                         <p><br></p>
-                        <form role="form" method="post" action="<?php echo site_url('user/printt')?>" enctype="multipart/form-data"> 
+                        <?php echo form_open_multipart('User/printt'); ?>
                             <div class="form-group"> 
                                 <label class="control-label" for="exampleInputEmail1">Ukuran &nbsp;Kertas</label>
                                 <select class="form-control" id="ukurankertas" name="ukuran_krts"> 
@@ -120,42 +120,20 @@ function resizeText() {
                                 <input type="date" id="tanggal" class="form-control" id="tanggal" placeholder="Placeholder text" required name="tgl_ambil" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" onchange="buka()">
                             </div>
                             <div class="form-group"> 
+                                <label class="control-label" for="exampleInputEmail1">Pilih Vendor</label>
+                                <select class="form-control" id="waktupengambilan" name="vendor">
+                                    <?php foreach($vendor as $vendors){ ?>
+                                    <option value="<?=$vendors->nama_vendor ?>"><?= $vendors->nama_vendor ?></option>
+                                <?php } ?>
+                                </select>                                 
+                            </div>
+                            <div class="form-group"> 
                                 <label class="control-label" for="exampleInputEmail1">Waktu Pengambilan</label>
                                 <select class="form-control" id="waktupengambilan" name="waktu">
-                                    <?php 
-                                        if(date('h.i') > '06.00')
-                                        {
-                                            echo "<option value='06.00' disabled>06.00</option>"; 
-                                        }
-                                        else
-                                        {
-                                            echo "<option value='06.00'>06.00</option>";
-                                        }
-                                        if(date('h.i') > '10.00')
-                                        {
-                                            echo "<option value='10.00' disabled>10.00</option>"; 
-                                        }
-                                        else
-                                        {
-                                            echo "<option value='10.00'>10.00</option>";
-                                        }
-                                        if(date('h.i') > '16.00')
-                                        {
-                                            echo "<option value='16.00' disabled>16.00</option>"; 
-                                        }
-                                        else
-                                        {
-                                            echo "<option value='16.00'>16.00</option>";
-                                        }
-                                        if(date('h.i') > '20.00')
-                                        {
-                                            echo "<option value='20.00' disabled>20.00</option>"; 
-                                        }
-                                        else
-                                        {
-                                            echo "<option value='20.00'>20.00</option>";
-                                        }
-                                    ?>                                   
+                                    <option value="06.00">06.00</option>
+                                    <option value="10.00">10.00</option>
+                                    <option value="16.00">16.00</option>
+                                    <option value="20.00">20.00</option>
                                 </select>                                 
                             </div>
                             <div class="form-group"> 
@@ -169,7 +147,7 @@ function resizeText() {
                             </div>
                             <input type="hidden" name="is_submit" value="1" />                             
                             <button type="submit" class="btn" name="submit" value="Submit">Submit</button>                             
-                        </form>
+                        <?php echo form_close()?>
                     </div>
                     <div class="col-md-6">
                         <img src="http://www.mycareerworks.org/wp-content/uploads/2017/04/businesswoman.png" /> 
@@ -190,10 +168,10 @@ function resizeText() {
         <!--new_portfolio-->         
         <!--
 <section class="main-section paddind" id="Portfolio">
-	<div class="container">
-    	<h2>Portfolio</h2>
-    	<h6>Fresh portfolio of designs that will keep you wanting more.</h6>
-	</div>
+    <div class="container">
+        <h2>Portfolio</h2>
+        <h6>Fresh portfolio of designs that will keep you wanting more.</h6>
+    </div>
     
     
 </section>   
@@ -239,106 +217,106 @@ function resizeText() {
     document.getElementById('').onclick = function() {
       var section = document.createElement('section');
       section.className = 'wow fadeInDown';
-	  section.className = 'wow shake';
-	  section.className = 'wow zoomIn';
-	  section.className = 'wow lightSpeedIn';
+      section.className = 'wow shake';
+      section.className = 'wow zoomIn';
+      section.className = 'wow lightSpeedIn';
       this.parentNode.insertBefore(section, this);
     };
   </script>         
         <script type="text/javascript">
-	$(window).load(function(){
-		
-		$('a').bind('click',function(event){
-			var $anchor = $(this);
-			
-			$('html, body').stop().animate({
-				scrollTop: $($anchor.attr('href')).offset().top - 91
-			}, 1500,'easeInOutExpo');
-			/*
-			if you don't want to use the easing effects:
-			$('html, body').stop().animate({
-				scrollTop: $($anchor.attr('href')).offset().top
-			}, 1000);
-			*/
-			event.preventDefault();
-		});
-	})
+    $(window).load(function(){
+        
+        $('a').bind('click',function(event){
+            var $anchor = $(this);
+            
+            $('html, body').stop().animate({
+                scrollTop: $($anchor.attr('href')).offset().top - 91
+            }, 1500,'easeInOutExpo');
+            /*
+            if you don't want to use the easing effects:
+            $('html, body').stop().animate({
+                scrollTop: $($anchor.attr('href')).offset().top
+            }, 1000);
+            */
+            event.preventDefault();
+        });
+    })
 </script>         
         <script type="text/javascript">
 
    
   jQuery(document).ready(function($){     
 // Portfolio Isotope
-	var container = $('#portfolio-wrap');	
-	
+    var container = $('#portfolio-wrap');   
+    
 
-	container.isotope({
-		animationEngine : 'best-available',
-	  	animationOptions: {
-	     	duration: 200,
-	     	queue: false
-	   	},
-		layoutMode: 'fitRows'
-	});	
+    container.isotope({
+        animationEngine : 'best-available',
+        animationOptions: {
+            duration: 200,
+            queue: false
+        },
+        layoutMode: 'fitRows'
+    }); 
 
-	$('#filters a').click(function(){
-		$('#filters a').removeClass('active');
-		$(this).addClass('active');
-		var selector = $(this).attr('data-filter');
-	  	container.isotope({ filter: selector });
-        setProjects();		
-	  	return false;
-	});
-		
-		
-		function splitColumns() { 
-			var winWidth = $(window).width(), 
-				columnNumb = 1;
-			
-			
-			if (winWidth > 1024) {
-				columnNumb = 4;
-			} else if (winWidth > 900) {
-				columnNumb = 2;
-			} else if (winWidth > 479) {
-				columnNumb = 2;
-			} else if (winWidth < 479) {
-				columnNumb = 1;
-			}
-			
-			return columnNumb;
-		}		
-		
-		function setColumns() { 
-			var winWidth = $(window).width(), 
-				columnNumb = splitColumns(), 
-				postWidth = Math.floor(winWidth / columnNumb);
-			
-			container.find('.portfolio-item').each(function () { 
-				$(this).css( { 
-					width : postWidth + 'px' 
-				});
-			});
-		}		
-		
-		function setProjects() { 
-			setColumns();
-			container.isotope('reLayout');
-		}		
-		
-		container.imagesLoaded(function () { 
-			setColumns();
-		});
-		
-	
-		$(window).bind('resize', function () { 
-			setProjects();			
-		});
+    $('#filters a').click(function(){
+        $('#filters a').removeClass('active');
+        $(this).addClass('active');
+        var selector = $(this).attr('data-filter');
+        container.isotope({ filter: selector });
+        setProjects();      
+        return false;
+    });
+        
+        
+        function splitColumns() { 
+            var winWidth = $(window).width(), 
+                columnNumb = 1;
+            
+            
+            if (winWidth > 1024) {
+                columnNumb = 4;
+            } else if (winWidth > 900) {
+                columnNumb = 2;
+            } else if (winWidth > 479) {
+                columnNumb = 2;
+            } else if (winWidth < 479) {
+                columnNumb = 1;
+            }
+            
+            return columnNumb;
+        }       
+        
+        function setColumns() { 
+            var winWidth = $(window).width(), 
+                columnNumb = splitColumns(), 
+                postWidth = Math.floor(winWidth / columnNumb);
+            
+            container.find('.portfolio-item').each(function () { 
+                $(this).css( { 
+                    width : postWidth + 'px' 
+                });
+            });
+        }       
+        
+        function setProjects() { 
+            setColumns();
+            container.isotope('reLayout');
+        }       
+        
+        container.imagesLoaded(function () { 
+            setColumns();
+        });
+        
+    
+        $(window).bind('resize', function () { 
+            setProjects();          
+        });
 
 });
 $( window ).load(function() {
-	jQuery('#all').click();
-	return false;
+    jQuery('#all').click();
+    return false;
 });
 </script>         
         <script src="contactform/contactform.js"></script>         

@@ -10,7 +10,7 @@
         <link href="<?php echo base_url ('assets/css/linecons.css') ?>" rel="stylesheet" type="text/css">
         <link href="<?php echo base_url ('assets/css/font-awesome.css') ?>" rel="stylesheet" type="text/css">
         <link href="<?php echo base_url ('assets/css/responsive.css') ?>" rel="stylesheet" type="text/css">
-        <link href="<?php echo base_url ('assets/css/animate.css') ?>" rel="stylesheet" type="text/css">
+        <link href="<?php echo base_url ('assets/css/animate.css') ?>" rel="stylesheet" type="text/css"> 
         <link href='https://fonts.googleapis.com/css?family=Lato:400,900,700,700italic,400italic,300italic,300,100italic,100,900italic' rel='stylesheet' type='text/css'> 
         <link href='https://fonts.googleapis.com/css?family=Dosis:400,500,700,800,600,300,200' rel='stylesheet' type='text/css'> 
         <!-- =======================================================
@@ -58,23 +58,25 @@ function resizeText() {
     </head>     
     <body> 
         <!--Header_section-->         
-        <header id="header_outer"> 
+        <header style="padding-top:30px"> 
             <div class="container"> 
                 <div class="header_section"> 
                     <div class="logo">
                         <a href="javascript:void(0)">
-                           <img src="http://127.0.0.1/printpbw/assets/img/logob.png" alt="">
+                            <img src="img/logob.png" alt="">
                         </a>
                     </div>                     
                     <nav class="nav" id="nav"> 
                         <ul> 
                             <li>
-                                <a href="<?php echo site_url('vendor/showSetting')?>">Setting</a>
-                            </li>   
+                                <a href="<?php echo site_url('display/index')?>">Home</a>
+                            </li>
                             <li>
-                                <a href="<?php echo site_url('vendor/logout')?>">Log Out</a>
-                            </li>    
-
+                                <a href="<?php echo site_url('vendor/dashboardvendor')?>">Dashboard</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo site_url('user/logout')?>">Log Out</a>
+                            </li>                             
                         </ul>                         
                     </nav>                     
                     <a class="res-nav_click animated wobble wow" href="javascript:void(0)"><i class="fa-bars"></i></a> 
@@ -83,39 +85,43 @@ function resizeText() {
             <div class="container" style="padding:20px;">
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <h2>Hello <?php echo $this->session->userdata('username')?>!</h2>
+                        <h2>Order Masuk</h2>
+                        <!--<h2>Hello <?php// echo $this->session->vendor('username')?>! dengan id <?php //echo $this->session->vendor('vendor_id')?> </h2>-->
+                        <h3></h3>
+                        <h3></h3> 
                     </div>
                 </div>
                 <div class="row" style="padding:50px">
-                    <div class="col-md-6 text-center">
-                        <h3>Konfirmasi Pesanan</h3> 
-                        <p>Menu untuk mengkonfirmasi pesanan yang telah dibayar</p>
-                        <a href="<?php echo site_url('vendor/lihatOrder')?>">
-                            <img src="https://image.flaticon.com/icons/svg/201/201579.svg" width="30%" class="img-thumbnail text-center" /> 
-                        </a>
-                    </div>
-                    <div class="col-md-6 text-center">
-                        <h3>Data Transaksi</h3> 
-                        <p>Menu untuk melihat histori</p>
-                        <a href="<?php echo site_url('admin/dataHistory')?>">
-                            <img src="https://image.flaticon.com/icons/svg/387/387615.svg" class="img-responsive img-thumbnail" width="30%" />
-                        </a>    
-                    </div>
-
-                    <div class="col-md-6 text-center">
-                        <h3>Histori</h3> 
-                        <p>Menu untuk data admin</p>
-                        <a href="<?php echo site_url('vendor/cekHistori')?>">
-                            <img src="https://image.flaticon.com/icons/svg/387/387615.svg" class="img-responsive img-thumbnail" width="30%" />
-                        </a>
-                    </div>
-                    <div class="col-md-6 text-center">
-                        <h3>Tambah Admin</h3> 
-                        <p>Menu untuk menambah admin</p>
-                        <a href="<?php echo site_url('admin/tambahAdmin')?>">
-                            <img src="https://image.flaticon.com/icons/svg/387/387615.svg" class="img-responsive img-thumbnail" width="30%" />
-                        </a>
-                    </div>
+                    <table class="table"> 
+                        <thead style="text-align: center; background-color: blue">
+                            <td><strong>Tanggal Order</strong></td>
+                            <td><strong>Ukuran Kertas</strong></td>
+                            <td><strong>Warna</strong></td>
+                            <td><strong>Jumlah Copy</strong></td>
+                            <td><strong>Tanggal Ambil</strong></td>
+                            <td><strong>Waktu</strong></td>
+                            <td><strong>Pesan</strong></td>
+                            <td><strong>File</strong></td>
+                            <td><strong>Status</strong></td>
+                            <td><strong>Konfirmasi</strong></td>
+                        </thead>                         
+                        <tbody>
+                            <?php foreach ($data as $x) { ?>
+                            <tr>
+                                <td><?= $x['tgl_order'] ?></td>
+                                <td><?= $x['ukuran_krts'] ?></td>
+                                <td><?= $x['warna'] ?></td>
+                                <td><?= $x['jumlah_copy'] ?></td>
+                                <td><?= $x['tgl_ambil'] ?></td>
+                                <td><?= $x['waktu'] ?></td>
+                                <td><?= $x['pesan'] ?></td>
+                                <td><?= $x['file'] ?></td>
+                                <td><?= $x['status'] ?></td>
+                                <td><a href="<?php echo base_url().'Vendor/konfirmasi/'.$x['id'];?>">Konfirmasi</a></td>
+                            </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>             
         </header>         
@@ -237,37 +243,4 @@ function resizeText() {
         }       
         
         function setColumns() { 
-            var winWidth = $(window).width(), 
-                columnNumb = splitColumns(), 
-                postWidth = Math.floor(winWidth / columnNumb);
-            
-            container.find('.portfolio-item').each(function () { 
-                $(this).css( { 
-                    width : postWidth + 'px' 
-                });
-            });
-        }       
-        
-        function setProjects() { 
-            setColumns();
-            container.isotope('reLayout');
-        }       
-        
-        container.imagesLoaded(function () { 
-            setColumns();
-        });
-        
-    
-        $(window).bind('resize', function () { 
-            setProjects();          
-        });
-
-});
-$( window ).load(function() {
-    jQuery('#all').click();
-    return false;
-});
-</script>         
-        <script src="contactform/contactform.js"></script>         
-    </body>     
-</html>
+            var w

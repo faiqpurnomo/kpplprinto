@@ -91,15 +91,15 @@ function resizeText() {
                                 'name' => $this->security->get_csrf_token_name(),
                                 'hash' => $this->security->get_csrf_hash()
                         );?>
-                        <form role="form" method="post" action="<?php echo site_url('user/register')?>">
+                        <form role="form" method="post" action="<?php echo site_url('vendor/register')?>">
                         <input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" /> 
                             <div class="form-group"> 
                                 <label class="control-label" for="exampleInputEmail1">Nama</label>                                 
                                 <input type="text" name="nama" class="form-control" id="nama" placeholder="Masukkan nama Anda" value> 
                             </div>
                             <div class="form-group"> 
-                                <label class="control-label" for="exampleInputEmail1">No Handphone</label>                                 
-                                <input type="text" name="nohandphone" class="form-control" id="nama" placeholder="+62" value> 
+                                <label class="control-label" for="exampleInputEmail1">Username</label>                                 
+                                <input type="text" name="username" class="form-control" id="nama" placeholder="+62" value> 
                             </div>
                             <div class="form-group"> 
                                 <label class="control-label" for="exampleInputEmail1">Email address</label>                                 

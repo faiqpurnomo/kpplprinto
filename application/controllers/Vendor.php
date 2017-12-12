@@ -21,6 +21,59 @@ class Vendor extends CI_Controller {
 		$data['err_message'] = "";
 	}
 
+	//hafizh
+	function register(){
+		$this->form_validation->set_rules('nama', 'Nama', 'required');
+		$this->form_validation->set_rules('username', 'Username', 'required');
+		$this->form_validation->set_rules('rekening', 'Nomor rekening', 'required');
+		$this->form_validation->set_rules('password', 'Password', 'required');
+		$this->form_validation->set_rules('password2', 'Password2', 'required');
+
+		if($this->form_validation->run() == false){
+			redirect('Display/registervendor');
+		}
+		else{
+		$pass = html_escape($this->input->post('password', TRUE));
+		$pass2 = html_escape($this->input->post('password2', TRUE));
+
+		if ($pass != $pass2) {
+			$data['err_message'] = "Password tidak cocok!";
+			$this->load->view('user/register');
+		} else {	
+
+		$data = array(
+			'username' => html_escape($this->input->post('username', TRUE)),
+			'pass' => html_escape($this->input->post('password', TRUE)),
+			'rekening' => html_escape($this->input->post('rekening', TRUE)),
+		);
+		
+		$this->Vendor_model->registerVendor($data);
+		$this->load->view('display/loginvendor');
+		}}
+
+	}
+
+	//apiz
+	function lihatOrder(){
+		$this->session();
+		$data = $this->Vendor_model->getOrder();
+		$this->load->view('vendor/seeOrder', array('data' => $data));
+	}
+
+	function cekHistori(){
+		$this->session();
+		$data = $this->Vendor_model->getOrderHistori();
+		$this->load->view('vendor/seeOrder', array('data' => $data));
+	}
+
+	//apiz
+	function konfirmasi($id){
+		$this->session();
+		$this->Vendor_model->updateOrder($id);
+		$this->lihatOrder();
+		//$this->load->view('vendor/seeOrder');
+	}
+
 	function login() {
 		$this->form_validation->set_rules('username', 'username', 'required');
 		$this->form_validation->set_rules('pass', 'pass', 'required');

@@ -3,7 +3,7 @@ class User extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('User_Model');
-		$this->load->library('upload');
+		//$this->load->library('upload');
 		$this->load->library('session');
 		$this->load->helper('security');
 		$this->load->helper('form');
@@ -72,7 +72,7 @@ class User extends CI_Controller {
 		}
 		else{
 		$pass = html_escape($this->input->post('password', TRUE));
-		$pass2 = sha1($this->input->post('password2', TRUE));
+		$pass2 = ($this->input->post('password2', TRUE));
 
 		if ($pass != $pass2) {
 			$data['err_message'] = "Password tidak cocok!";
@@ -150,7 +150,8 @@ class User extends CI_Controller {
 
 	function showPrint(){
 		$this->session();
-		$this->load->view('user/print');
+		$data['vendor'] = $this->User_Model->getVendor();
+		$this->load->view('user/print', $data);
 		$data['err_message'] = "";
 		
 	}
@@ -209,8 +210,9 @@ class User extends CI_Controller {
 		if(isset($is_submit) && $is_submit == 1){
 			$fileUpload = array();
 		 	$isUpload = FALSE;
+		 	$path = './uploads/';
 		 	$config = array(
-		 		'upload_path' => './uploads/',
+		 		'upload_path' => $path,
 		 		'allowed_types' => 'doc|docx|pdf',
 		 		'max_size' => 15000
 		 	);
@@ -232,6 +234,7 @@ class User extends CI_Controller {
 					'tgl_ambil' => $this->input->post('tgl_ambil'),
 					'waktu' => $this->input->post('waktu'),
 					'pesan' => $this->input->post('pesan'),
+					'vendor' => set_value('vendor'),
 					'file' => $fileUpload['file_name'],
 					'status'=> 'Proses'
 			 	);
@@ -241,7 +244,8 @@ class User extends CI_Controller {
 			 	//$this->load->view('user/showDashboard1');
 			}
 		} else {
-		 	$this->load->view('user/print');
+		 	//$this->load->view('user/print');
+		 	echo 'gagal2';
 		}
 	}
 }
